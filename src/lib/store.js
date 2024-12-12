@@ -4,6 +4,7 @@ export const showForm = writable(false);
 export const selectedNote = writable({
     title: "",
     description: "",
+    tag: "",
 });
 export const selectedNoteIdForDelete = writable(null);
 export const searchQuery = writable("");
@@ -24,3 +25,4 @@ export const saveNotesToLocalStorage = (notes) => {
         localStorage.setItem('notes', JSON.stringify(notes));
     }
 };
+

@@ -1,22 +1,22 @@
 <script>
-    import { showForm, selectedNote } from './store.js';
-    import CreateNote from './CreateNote.svelte';
+    import { showForm, selectedNote } from "./store.js";
+    import CreateNote from "./CreateNote.svelte";
 
     let isVisible;
     let note;
 
-    $: showForm.subscribe(value => {
+    $: showForm.subscribe((value) => {
         isVisible = value;
     });
 
-    $: selectedNote.subscribe(value => {
+    $: selectedNote.subscribe((value) => {
         note = value;
     });
 </script>
 
 <div class="section">
     {#if isVisible}
-        <CreateNote {note}/>
+        <CreateNote {note} />
     {:else}
         <h5>Hola!!</h5>
         <p>Crea una nueva nota o edita una creada...</p>
@@ -45,4 +45,3 @@
         font-family: Arial, Helvetica, sans-serif;
     }
 </style>
-

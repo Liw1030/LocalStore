@@ -1,5 +1,5 @@
 <script>
-    import { selectedNoteIdForDelete } from './store.js';
+    import { saveNotesToLocalStorage, selectedNoteIdForDelete } from './store.js';
 
     export let noteId;
 
@@ -16,7 +16,7 @@
         }
     };
 
-    // Reactividad para ejecutar deleteTask cuando noteId cambie
+
     $: if (noteId) {
         deleteTask(noteId);
     }

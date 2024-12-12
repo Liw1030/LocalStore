@@ -1,5 +1,5 @@
 <script>
-    import { searchQuery } from './store.js';
+    import { searchQuery } from "./store.js";
 
     const handleSearch = (event) => {
         searchQuery.set(event.target.value);
@@ -47,7 +47,7 @@
         background: url("/icon-search.svg") no-repeat 4px center;
         background-size: 20px;
     }
-    img{
+    img {
         margin: 0px 15px;
     }
 </style>

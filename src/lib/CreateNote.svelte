@@ -1,10 +1,15 @@
 <script>
-    import { showForm, getNotesFromLocalStorage, saveNotesToLocalStorage } from './store.js';
+    import {
+        showForm,
+        getNotesFromLocalStorage,
+        saveNotesToLocalStorage,
+    } from "./store.js";
 
     export let note = {
         id: null,
         title: "",
         description: "",
+        tag: "",
     };
 
     const resetNote = () => {
@@ -12,6 +17,7 @@
             id: null,
             title: "",
             description: "",
+            tag: "",
         };
     };
 
@@ -19,7 +25,7 @@
         let notes = getNotesFromLocalStorage();
 
         if (note.id) {
-            notes = notes.map(n => n.id === note.id ? note : n);
+            notes = notes.map((n) => (n.id === note.id ? note : n));
             console.log("Nota actualizada");
         } else {
             note.id = Date.now().toString();
@@ -34,6 +40,9 @@
         addOrUpdateNote();
         resetNote();
         showForm.set(false);
+        if (typeof window !== "undefined") {
+            window.location.reload();
+        }
     };
 </script>
 
@@ -46,6 +55,16 @@
         placeholder="Titulo de la nota"
         bind:value={note.title}
     />
+    <div class="tag">
+        <label for="tag">Etiqueta:</label>
+        <select name="tag" id="tag" bind:value={note.tag}>
+            <option value="Casa">Casa </option>
+            <option value="Trabajo">Trabajo</option>
+            <option value="Mascotas">Mascotas</option>
+            <option value="Familia">Familia</option>
+            <option value="Otros">Otros</option>
+        </select>
+    </div>
     <label for="description">Descripción</label>
     <textarea
         name="description"
@@ -77,11 +96,12 @@
         border: 1px solid rgb(167, 167, 167);
         border-radius: 5px;
         height: 30px;
+        width: 100%;
     }
     textarea {
         margin: 10px 0px;
         height: 359px;
-        width: 500px;
+        width: 100%;
         border: 1px solid rgb(167, 167, 167);
         border-radius: 5px;
         font-family: Arial, Helvetica, sans-serif;
@@ -94,5 +114,16 @@
         height: 30px;
         margin-top: 15px;
         cursor: pointer;
+        width: 100%;
+    }
+
+    .tag {
+        margin-bottom: 10px;
+    }
+
+    select{
+        border: 1px solid rgb(167, 167, 167);
+        border-radius: 5px;
+        
     }
 </style>

@@ -5,9 +5,9 @@
     let notes = [];
     let filteredNotes = [];
 
-    // Cargar notas desde localStorage al montar el componente
+
     const loadNotes = () => {
-        const storedNotes = localStorage.getItem("notes");
+        const storedNotes = localStorage.getItem('notes');
         if (storedNotes) {
             notes = JSON.parse(storedNotes);
         }
@@ -16,16 +16,14 @@
 
     onMount(loadNotes);
 
-    // Guardar notas en localStorage
+
     const saveNotes = () => {
         localStorage.setItem("notes", JSON.stringify(notes));
     };
 
-    // Filtrar notas en base a la búsqueda
     const filterNotes = () => {
         searchQuery.subscribe((value) => {
-            filteredNotes = notes.filter(
-                (note) =>
+            filteredNotes = notes.filter(note =>
                     note.title.toLowerCase().includes(value.toLowerCase()) ||
                     note.description
                         .toLowerCase()
@@ -34,7 +32,7 @@
         });
     };
 
-    // Manejar la selección de una nota
+
     const handleNoteClick = (note) => {
         selectedNote.set(note);
         showForm.set(true);

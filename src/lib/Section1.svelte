@@ -1,11 +1,16 @@
 <script>
-    import { showForm, selectedNote } from './store.js';
-    import ListNote from './ListNote.svelte';
+    import { showForm, selectedNote, searchQuery } from "./store.js";
+    import ListNote from "./ListNote.svelte";
+    import { onMount } from "svelte";
+    import { get} from "svelte/store";
+
+    let notes = [];
 
     const handleClick = () => {
         selectedNote.set({
             title: "",
             description: "",
+            tag: "",
         });
         showForm.set(true);
     };

@@ -1,40 +1,57 @@
 <script>
-    import { selectedNote, selectedNoteIdForDelete } from './store.js';
+    import { selectedNote, selectedNoteIdForDelete } from "./store.js";
 
     let noteId;
     let note;
 
-    selectedNote.subscribe(value => {
+    selectedNote.subscribe((value) => {
         note = value;
         noteId = value ? value.id : null;
     });
 
     const deleteTask = (id) => {
-        const storedNotes = localStorage.getItem('notes');
-        let notes = storedNotes ? JSON.parse(storedNotes) : [];
+        if (typeof window !== "undefined" && id !== undefined) {
+            const storedNotes = localStorage.getItem("notes");
 
-        notes = notes.filter(note => note.id !== id);
-        localStorage.setItem('notes', JSON.stringify(notes));
-        console.log("Nota eliminada");
+            if (storedNotes) {
+                let notes = JSON.parse(storedNotes);
 
-        selectedNoteIdForDelete.set(null);
-        selectedNote.set(null);
+                notes = notes.filter((note) => note.id !== id);
+                localStorage.setItem("notes", JSON.stringify(notes));
+                console.log("Nota eliminada");
+
+                selectedNoteIdForDelete.set(null);
+                selectedNote.set(null);
+            } else {
+                console.warn("No hay notas guardadas.");
+            }
+        }
     };
 
     const archiveTask = (id, archive) => {
-        const storedNotes = localStorage.getItem('notes');
-        let notes = storedNotes ? JSON.parse(storedNotes) : [];
+        if (typeof window !== "undefined" && id !== undefined) {
+            const storedNotes = localStorage.getItem("notes");
 
-        notes = notes.map(note => note.id === id ? { ...note, archived: archive } : note);
-        localStorage.setItem('notes', JSON.stringify(notes));
-        console.log(`Nota ${archive ? 'archivada' : 'desarchivada'}`);
+            if (storedNotes) {
+                let notes = JSON.parse(storedNotes);
 
-        selectedNote.set(null);
+                notes = notes.map((note) =>
+                    note.id === id ? { ...note, archived: archive } : note,
+                );
+                localStorage.setItem("notes", JSON.stringify(notes));
+                console.log(`Nota ${archive ? "archivada" : "desarchivada"}`);
+
+                selectedNote.set(null);
+            } else {
+                console.warn("No hay notas guardadas.");
+            }
+        }
     };
 
     const handleDeleteClick = () => {
         if (noteId) {
             deleteTask(noteId);
+            window.location.reload();
         }
     };
 
@@ -53,9 +70,15 @@
 
 <div class="section">
     <div class="options">
-        <button class="archive" on:click={handleArchiveClick}>Archivar Nota</button>
-        <button class="unarchive" on:click={handleUnarchiveClick}>Desarchivar Nota</button>
-        <button class="delete" on:click={handleDeleteClick}>Eliminar Nota</button>
+        <button class="archive" on:click={handleArchiveClick}
+            >Archivar Nota</button
+        >
+        <button class="unarchive" on:click={handleUnarchiveClick}
+            >Desarchivar Nota</button
+        >
+        <button class="delete" on:click={handleDeleteClick}
+            >Eliminar Nota</button
+        >
     </div>
 </div>
 
@@ -74,7 +97,6 @@
     }
 
     .archive {
-        background-color: transparent;
         border: 1px solid rgb(167, 167, 167);
         border-radius: 5px;
         width: 200px;
@@ -84,6 +106,7 @@
         background-size: 20px;
         cursor: pointer;
         margin: 10px 20px;
+        align-self: center;
     }
 
     .archive:hover {
@@ -91,7 +114,6 @@
     }
 
     .delete {
-        background-color: transparent;
         border: 1px solid rgb(167, 167, 167);
         border-radius: 5px;
         width: 200px;
@@ -101,6 +123,7 @@
         background-size: 20px;
         cursor: pointer;
         margin: 10px 20px;
+        align-self: center;
     }
 
     .delete:hover {
@@ -108,18 +131,17 @@
     }
 
     .unarchive {
-        background-color: transparent;
         border: 1px solid rgb(167, 167, 167);
         border-radius: 5px;
         width: 200px;
         height: 40px;
         padding-left: 30px;
-        background: url("/icon-unarchive.svg") no-repeat 4px center;
+        background: url("/icon-delete.svg") no-repeat 4px center;
         background-size: 20px;
         cursor: pointer;
         margin: 10px 20px;
+        align-self: center;
     }
-
     .unarchive:hover {
         background-color: rgba(134, 134, 134, 0.26);
     }

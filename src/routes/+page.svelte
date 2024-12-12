@@ -1,24 +1,25 @@
 <script>
-    import Sidebar from '$lib/Sidebar.svelte';
-    import Header from '$lib/Header.svelte';
-    import Section1 from '$lib/Section1.svelte';
-    import Section2 from '$lib/Section2.svelte';
-    import Section3 from '$lib/Section3.svelte';
-    import { onMount } from 'svelte';
+    import Sidebar from "$lib/Sidebar.svelte";
+    import Header from "$lib/Header.svelte";
+    import Section1 from "$lib/Section1.svelte";
+    import Section2 from "$lib/Section2.svelte";
+    import Section3 from "$lib/Section3.svelte";
+    import { onMount } from "svelte";
 
-    let section3Content = '';
+    let section3Content = "";
 
     onMount(() => {
-        if (typeof window !== 'undefined') {
-            section3Content = localStorage.getItem('section3') || '';
+    if (typeof window !== "undefined") {
+            section3Content = localStorage.getItem("section3") || "";
         }
     });
 
-    $: if (typeof window !== 'undefined') {
-        localStorage.setItem('section3', section3Content);
+    $: if (typeof window !== "undefined") {
+        localStorage.setItem("section3", section3Content);
     }
 </script>
 
+<section>
 <div class="sidebar">
     <Sidebar />
 </div>
@@ -36,32 +37,29 @@
         </div>
     </div>
 </div>
+</section>
 
 <style>
-    .sidebar {
-        width: 250px;
-        background-color: #f4f4f4;
-        padding: 10px;
+    section{
+        display: flex;
+        flex-direction: row;
+        height: 1000%;
     }
     .content {
         flex: 1;
         display: flex;
         flex-direction: column;
-        margin-left: 250px;
     }
     .body {
         display: flex;
-        height: 100%;
-        padding: 10px;
-        background-color: #fafafa;
+		height: 100%;
     }
-    .section1, .section2, .section3 {
-        padding: 10px;
-        border: 1px solid #ccc;
-        background-color: #fff;
+    .section1, .section3 {
+        flex: 1;
+		height: 100%;
     }
     .section2 {
         flex: 2;
+		height: 100%;
     }
 </style>
-
