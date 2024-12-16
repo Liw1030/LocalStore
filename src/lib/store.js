@@ -26,3 +26,5 @@ export const saveNotesToLocalStorage = (notes) => {
     }
 };
 
+
+export const filterTag = writable('');

@@ -59,6 +59,7 @@
                     ><img
                         src="/icon-archive.svg"
                         alt="Archived Notes Icon"
+                        class="Archived"
                     />Notas archivadas</button
                 >
             </li>
@@ -139,5 +140,9 @@
         cursor: pointer;
         border: none;
         margin-top: 10px;
+    }
+
+    .Archived{
+        cursor: pointer;
     }
 </style>
