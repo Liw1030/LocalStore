@@ -1,5 +1,5 @@
 <script>
-    import { saveNotesToLocalStorage, selectedNoteIdForDelete } from './store.js';
+    import { saveNotesToLocalStorage, selectedNoteIdForDelete } from '../store.js';
 
     export let noteId;
 

@@ -1,6 +1,6 @@
 <script>
-    import { showForm, selectedNote } from "./store.js";
-    import CreateNote from "./CreateNote.svelte";
+    import { showForm, selectedNote } from "../store.js";
+    import CreateNote from "../Crud/CreateNote.svelte";
 
     let isVisible;
     let note;

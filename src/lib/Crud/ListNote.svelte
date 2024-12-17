@@ -1,10 +1,9 @@
 <script>
-    import { showForm, selectedNote, searchQuery } from "./store.js";
+    import { showForm, selectedNote, searchQuery, isMenuOpen } from "$lib/store.js"; // Verifica la ruta correcta
     import { onMount } from "svelte";
 
     let notes = [];
     let filteredNotes = [];
-
 
     const loadNotes = () => {
         const storedNotes = localStorage.getItem('notes');
@@ -16,7 +15,6 @@
 
     onMount(loadNotes);
 
-
     const saveNotes = () => {
         localStorage.setItem("notes", JSON.stringify(notes));
     };
@@ -24,18 +22,16 @@
     const filterNotes = () => {
         searchQuery.subscribe((value) => {
             filteredNotes = notes.filter(note =>
-                    note.title.toLowerCase().includes(value.toLowerCase()) ||
-                    note.description
-                        .toLowerCase()
-                        .includes(value.toLowerCase()),
+                note.title.toLowerCase().includes(value.toLowerCase()) ||
+                note.description.toLowerCase().includes(value.toLowerCase()),
             );
         });
     };
 
-
     const handleNoteClick = (note) => {
         selectedNote.set(note);
         showForm.set(true);
+        isMenuOpen.set(true);
     };
 </script>
 

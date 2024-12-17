@@ -1,8 +1,7 @@
 <script>
-    import { showForm, selectedNote, searchQuery } from "./store.js";
-    import ListNote from "./ListNote.svelte";
-    import { onMount } from "svelte";
-    import { get} from "svelte/store";
+    import { showForm, selectedNote, searchQuery } from "../store.js";
+    import ListNote from "../Crud/ListNote.svelte";
+
 
     let notes = [];
 

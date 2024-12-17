@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 
+export const isMenuOpen = writable(false);
 export const showForm = writable(false);
 export const selectedNote = writable({
     title: "",
@@ -28,3 +29,4 @@ export const saveNotesToLocalStorage = (notes) => {
 
 
 export const filterTag = writable('');
+

@@ -1,5 +1,5 @@
 <script>
-    import { searchQuery } from './store.js';
+    import { searchQuery } from '../store.js';
 
     const handleSearch = (event) => {
         searchQuery.set(event.target.value);

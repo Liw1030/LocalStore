@@ -1,5 +1,5 @@
 <script>
-    import { selectedNote, selectedNoteIdForDelete } from "./store.js";
+    import { selectedNote, selectedNoteIdForDelete, isMenuOpen } from "../store.js";
 
     let noteId;
     let note;
@@ -68,6 +68,7 @@
     };
 </script>
 
+{#if $isMenuOpen}
 <div class="section">
     <div class="options">
         <button class="archive" on:click={handleArchiveClick}
@@ -81,6 +82,7 @@
         >
     </div>
 </div>
+{/if}
 
 <style>
     .section {

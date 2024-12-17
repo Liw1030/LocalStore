@@ -2,8 +2,8 @@
     import {
         showForm,
         getNotesFromLocalStorage,
-        saveNotesToLocalStorage,
-    } from "./store.js";
+        saveNotesToLocalStorage
+    } from "../store";
 
     export let note = {
         id: null,
@@ -56,7 +56,7 @@
         bind:value={note.title}
     />
     <div class="tag">
-        <label for="tag">Etiqueta:</label>
+        <label for="tag"><img src="../icon-tag.svg" alt="tag"></label>
         <select name="tag" id="tag" bind:value={note.tag}>
             <option value="Casa">Casa </option>
             <option value="Trabajo">Trabajo</option>
@@ -119,6 +119,16 @@
 
     .tag {
         margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        label{
+            align-items: center;
+        }
+        img{
+            height: 20px;
+            margin-right: 10px;
+            align-self: center;
+        }
     }
 
     select{
