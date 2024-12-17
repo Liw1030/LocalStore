@@ -1,5 +1,5 @@
 <script>
-    import { showForm, selectedNote, searchQuery, isMenuOpen } from "$lib/store.js"; // Verifica la ruta correcta
+    import { showForm, selectedNote, searchQuery, isMenuOpen } from "$lib/store.js"; 
     import { onMount } from "svelte";
 
     let notes = [];

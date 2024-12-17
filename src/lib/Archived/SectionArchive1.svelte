@@ -1,7 +1,6 @@
-<!-- src/lib/Archived/SectionArchived1.svelte -->
 <script>
-    import { showForm, selectedNote, searchQuery } from "../../store.js";  // Ajusta la ruta al store correctamente
-    import ListNote from "../Crud/ListNote.svelte";  // Ajusta la ruta según corresponda
+    import { showForm, selectedNote, searchQuery } from "../../store.js";  
+    import ListNote from "../Crud/ListNote.svelte"; 
     import { onMount } from "svelte";
     import { get } from "svelte/store";
   

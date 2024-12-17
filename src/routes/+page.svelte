@@ -73,9 +73,9 @@
         height: 100%;
     }
     .section3 {
-        display: none;  /* Ocultar inicialmente */
+        display: none;  
     }
     .section3.is-visible {
-        display: block;  /* Mostrar cuando is-visible esté activo */
+        display: block; 
     }
 </style>
