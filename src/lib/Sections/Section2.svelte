@@ -18,8 +18,10 @@
     {#if isVisible}
         <CreateNote {note} />
     {:else}
+    <div class="text">
         <h5>Hola!!</h5>
         <p>Crea una nueva nota o edita una creada...</p>
+    </div>
     {/if}
 </div>
 

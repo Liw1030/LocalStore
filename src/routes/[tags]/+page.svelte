@@ -1,17 +1,17 @@
 <script>
   import Sidebar from "$lib/Sidebar.svelte";
   import Header from "$lib/Header.svelte";
-  import Section1 from "$lib/Sections/Section1.svelte";
-  import Section2 from "$lib/Sections/Section2.svelte";
-  import Section3 from "$lib/Sections/Section3.svelte";
+  import Section1 from "../../lib/Sections/Section1.svelte";
+  import Section2 from "../../lib/Sections/Section2.svelte";
+  import Section3 from "../../lib/Sections/Section3.svelte";
   import { onMount } from "svelte";
-  import { isMenuOpen } from "../lib/store";
 
   let section3Content = "";
 
   onMount(() => {
     if (typeof window !== "undefined") {
       console.log(window.localStorage);
+      return;
       section3Content = localStorage.getItem("section3") || "";
     }
   });
@@ -31,14 +31,12 @@
       <div class="section1">
         <Section1 />
       </div>
-      <div class="section2" style="flex: {$isMenuOpen ? '2' : '3'};">
+      <div class="section2">
         <Section2 />
       </div>
-      {#if $isMenuOpen}
       <div class="section3">
         <Section3 bind:content={section3Content} />
       </div>
-      {/if}
     </div>
   </div>
 </section>
@@ -47,7 +45,7 @@
   section {
     display: flex;
     flex-direction: row;
-    height: 100%;
+    height: 1000%;
   }
   .content {
     flex: 1;
@@ -58,16 +56,13 @@
     display: flex;
     height: 100%;
   }
-  .section1 {
+  .section1,
+  .section3 {
     flex: 1;
     height: 100%;
   }
   .section2 {
-    height: 100%;
-    transition: flex 0.3s;
-  }
-  .section3 {
-    flex: 1;
+    flex: 2;
     height: 100%;
   }
 </style>

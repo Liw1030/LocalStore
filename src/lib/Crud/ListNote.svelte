@@ -1,54 +1,65 @@
 <script>
-    import { showForm, selectedNote, searchQuery, isMenuOpen } from "$lib/store.js"; 
-    import { onMount } from "svelte";
+  import { showForm, selectedNote, searchQuery, isMenuOpen } from "../store";
+  import { onMount } from "svelte";
 
-    let notes = [];
-    let filteredNotes = [];
+  let notes = [];
+  let filteredNotes = [];
 
-    const loadNotes = () => {
-        const storedNotes = localStorage.getItem('notes');
-        if (storedNotes) {
-            notes = JSON.parse(storedNotes);
-        }
-        filterNotes();
-    };
+  import { page } from "$app/stores";
 
-    onMount(loadNotes);
+  $: query = ($page.params.routes || "").toLowerCase();
 
-    const saveNotes = () => {
-        localStorage.setItem("notes", JSON.stringify(notes));
-    };
+  let loaded = false;
+  const loadNotes = () => {
+    const storedNotes = localStorage.getItem("notes");
+    if (storedNotes) {
+      notes = JSON.parse(storedNotes).filter(
+        (x) => !query || x.tag.toLowerCase() == query
+      );
+    }
+    filterNotes();
+    loaded = true;
+  };
 
-    const filterNotes = () => {
-        searchQuery.subscribe((value) => {
-            filteredNotes = notes.filter(note =>
-                note.title.toLowerCase().includes(value.toLowerCase()) ||
-                note.description.toLowerCase().includes(value.toLowerCase()),
-            );
-        });
-    };
+  onMount(loadNotes);
 
-    const handleNoteClick = (note) => {
-        selectedNote.set(note);
-        showForm.set(true);
-        isMenuOpen.set(true);
-    };
+  $: if (loaded && query) loadNotes();
+
+  const saveNotes = () => {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  };
+
+  const filterNotes = () => {
+    searchQuery.subscribe((value) => {
+      filteredNotes = notes.filter(
+        (note) =>
+          note.title.toLowerCase().includes(value.toLowerCase()) ||
+          note.description.toLowerCase().includes(value.toLowerCase())
+      );
+    });
+  };
+
+  const handleNoteClick = (note) => {
+    selectedNote.set(note);
+    showForm.set(true);
+    isMenuOpen.set(true);
+  };
 </script>
 
 {#each filteredNotes as note (note.id)}
-    <button on:click={() => handleNoteClick(note)}>{note.title}</button>
+  <button on:click={() => handleNoteClick(note)}>{note.title}</button>
 {/each}
 
 <style>
-    button {
-        height: 30px;
-        border: 1px solid rgb(167, 167, 167);
-        border-radius: 5px;
-        margin-top: 20px;
-        cursor: pointer;
-    }
+  button {
+    height: 30px;
+    border: 1px solid rgb(167, 167, 167);
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+  }
 
-    button:hover {
-        background-color: rgba(134, 134, 134, 0.26);
-    }
+  button:hover {
+    background-color: rgba(134, 134, 134, 0.26);
+  }
 </style>
