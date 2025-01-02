@@ -4,7 +4,7 @@
 
   let notes = [];
   let filteredNotes = [];
-
+ 
   import { page } from "$app/stores";
 
   $: query = ($page.params.routes || "").toLowerCase();
@@ -33,8 +33,9 @@
     searchQuery.subscribe((value) => {
       filteredNotes = notes.filter(
         (note) =>
-          note.title.toLowerCase().includes(value.toLowerCase()) ||
-          note.description.toLowerCase().includes(value.toLowerCase())
+          !note.archived && 
+          (note.title.toLowerCase().includes(value.toLowerCase()) ||
+           note.description.toLowerCase().includes(value.toLowerCase()))
       );
     });
   };

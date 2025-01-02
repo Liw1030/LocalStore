@@ -22,6 +22,7 @@
 
                 selectedNoteIdForDelete.set(null);
                 selectedNote.set(null);
+                window.location.reload();
             } else {
                 console.warn("No hay notas guardadas.");
             }
@@ -42,6 +43,7 @@
                 console.log(`Nota ${archive ? "archivada" : "desarchivada"}`);
 
                 selectedNote.set(null);
+                window.location.reload();
             } else {
                 console.warn("No hay notas guardadas.");
             }
@@ -66,6 +68,7 @@
             archiveTask(noteId, false);
         }
     };
+
 </script>
 
 {#if $isMenuOpen}

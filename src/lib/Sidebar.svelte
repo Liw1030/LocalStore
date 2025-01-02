@@ -12,10 +12,6 @@
     { name: "Otros" },
   ];
 
-  const reloadPage = () => {
-    window.location.reload();
-  };
-
   const loadArchivedNotes = () => {
     if (typeof window !== "undefined") {
       const storedNotes = localStorage.getItem("notes");
@@ -30,7 +26,7 @@
 
   const filterNotesByTag = (tag) => {
     if (typeof window !== "undefined") {
-      searchQuery.set(tag.toLowerCase()); // Convertir a minúsculas para el filtrado uniforme
+      searchQuery.set(tag.toLowerCase()); 
     }
   };
 
@@ -39,7 +35,6 @@
   $: selectedNoteIdForDelete.subscribe(() => {
     loadArchivedNotes();
   });
-
 </script>
 
 <div class="sidebar">
@@ -51,38 +46,28 @@
     <ul>
       <li>
         <a href="/">
-            <button>
-                <img src="/icon-home.svg" alt="All Notes Icon" /> Todas las notas
-            </button>
+          <button>
+            <img src="/icon-home.svg" alt="All Notes Icon" /> Todas las notas
+          </button>
         </a>
-    </li>
-       
+      </li>
       <li>
-        <button on:click={loadArchivedNotes}
-          ><img
-            src="/icon-archive.svg"
-            alt="Archived Notes Icon"
-            class="Archived"
-          />Notas archivadas</button
-        >
+        <a href="/archived">
+          <button on:click={loadArchivedNotes}>
+            <img src="/icon-archive.svg" alt="Archived Notes Icon" class="Archived" /> Notas archivadas
+          </button>
+        </a>
       </li>
     </ul>
-    {#if archivedNotes.length > 0}
-      <ul>
-        {#each archivedNotes as note}
-          <li><button>{note.title}</button></li>
-        {/each}
-      </ul>
-    {/if}
   </div>
   <div class="section">
     <h2>Etiquetas</h2>
     <ul>
       {#each tags as tag}
         <li>
-          <a class="tag" href={tag.name}
-            ><img src="/icon-tag.svg" alt="Tag Icon" />{tag.name}</a
-          >
+          <a class="tag" href={tag.name}>
+            <img src="/icon-tag.svg" alt="Tag Icon" /> {tag.name}
+          </a>
         </li>
       {/each}
     </ul>
@@ -99,6 +84,7 @@
     font-size: 12px;
     height: 100vh;
   }
+
   .logo {
     display: flex;
     align-items: center;
@@ -109,21 +95,25 @@
   .section {
     margin-bottom: 20px;
   }
+
   .section h2 {
     margin: 0;
     font-size: 14px;
     margin-bottom: 10px;
   }
+
   .section ul {
     list-style: none;
     padding: 0;
   }
+
   .section li {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
     cursor: pointer;
   }
+
   .section li img {
     width: 20px;
     height: 20px;
@@ -142,5 +132,9 @@
 
   .Archived {
     cursor: pointer;
+  }
+
+  a { 
+    text-decoration: none; 
   }
 </style>
