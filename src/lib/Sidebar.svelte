@@ -4,14 +4,6 @@
 
   let archivedNotes = [];
 
-  const tags = [
-    { name: "Casa" },
-    { name: "Trabajo" },
-    { name: "Mascotas" },
-    { name: "Familia" },
-    { name: "Otros" },
-  ];
-
   const loadArchivedNotes = () => {
     if (typeof window !== "undefined") {
       const storedNotes = localStorage.getItem("notes");
@@ -24,17 +16,12 @@
     }
   };
 
-  const filterNotesByTag = (tag) => {
-    if (typeof window !== "undefined") {
-      searchQuery.set(tag.toLowerCase()); 
-    }
-  };
-
   onMount(loadArchivedNotes);
 
   $: selectedNoteIdForDelete.subscribe(() => {
     loadArchivedNotes();
   });
+
 </script>
 
 <div class="sidebar">
@@ -46,30 +33,63 @@
     <ul>
       <li>
         <a href="/">
-          <button>
-            <img src="/icon-home.svg" alt="All Notes Icon" /> Todas las notas
-          </button>
+        <button>
+          <img src="/icon-home.svg" alt="All Notes Icon" /> Todas las notas
+        </button>
         </a>
       </li>
       <li>
         <a href="/archived">
           <button on:click={loadArchivedNotes}>
-            <img src="/icon-archive.svg" alt="Archived Notes Icon" class="Archived" /> Notas archivadas
+            <img
+              src="/icon-archive.svg"
+              alt="Archived Notes Icon"
+              class="Archived"
+            /> Notas archivadas
           </button>
         </a>
       </li>
     </ul>
   </div>
+
   <div class="section">
     <h2>Etiquetas</h2>
     <ul>
-      {#each tags as tag}
-        <li>
-          <a class="tag" href={tag.name}>
-            <img src="/icon-tag.svg" alt="Tag Icon" /> {tag.name}
-          </a>
-        </li>
-      {/each}
+      <li>
+        <a href="/ListNotesTagCasa">
+          <button>
+            <img src="/icon-tag.svg" alt="All Notes Icon" /> Casa
+          </button>
+        </a>
+      </li>
+      <li>
+        <a href="/ListNotesTagTrabajo">
+          <button>
+            <img src="/icon-tag.svg" alt="All Notes Icon" /> Trabajo
+          </button>
+        </a>
+      </li>
+      <li>
+        <a href="/ListNotesTagMascotas">
+          <button>
+            <img src="/icon-tag.svg" alt="All Notes Icon" /> Mascotas
+          </button>
+        </a>
+      </li>
+      <li>
+        <a href="ListNotesTagFamilia">
+          <button>
+            <img src="/icon-tag.svg" alt="All Notes Icon" /> Familia
+          </button>
+        </a>
+      </li>
+      <li>
+        <a href="ListNotesTagOtros">
+          <button>
+            <img src="/icon-tag.svg" alt="All Notes Icon" /> Otros
+          </button>
+        </a>
+      </li>
     </ul>
   </div>
 </div>
@@ -134,7 +154,7 @@
     cursor: pointer;
   }
 
-  a { 
-    text-decoration: none; 
+  a {
+    text-decoration: none;
   }
 </style>
